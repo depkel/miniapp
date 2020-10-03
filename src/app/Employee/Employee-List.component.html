@@ -1,0 +1,62 @@
+﻿
+<div>
+    <button class="btn btn-primary btn" (click)="CreateNewEmployee()"><span class="glyphicon glyphicon-plus-sign"></span> Create New</button>
+</div>
+<Employee-Count *ngIf="employees" [All]="GetAllEmployeeCount()" 
+                [Male]="GetMaleEmployeeCount()" 
+                [Female]="GetFemaleEmployeeCount()"
+                (countRadioButtonSelectionChanged)="onEmployeeCountRadioButtonChange($event)">
+</Employee-Count>
+<br/><br/>
+<br/>
+<div *ngIf='showEmployeeList'>
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Gender</th>
+            <th>Salary</th>
+            <th>Department</th>
+            <th>Active</th>
+            <th>Photopath</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-container *ngFor="let employee of employees;">
+            <tr *ngIf="employee.gender == selectedEmployeeCountRadioButton || selectedEmployeeCountRadioButton =='All'">
+                <td>
+                        <a [routerLink]="['/employees',employee.Id]">
+                            {{ employee.Id }}
+                        </a>
+                </td>
+                <td>
+                    <a [routerLink]="['/employees',employee.Id]">
+                        {{ employee.firstname | uppercase }}
+                    </a>
+                    </td>
+                <td>{{ employee.lastname | uppercase }}</td>
+                <td>{{ employee.gender }}</td>
+                <td>{{ employee.salary | currency}}</td>
+                <td>{{ employee.Department }}</td>
+                <td>{{ employee.isActive}}</td>
+                <td>{{ employee.PhotoPath}}</td>
+            </tr>
+        </ng-container>
+        <tr *ngIf="!employees">
+            <td colspan="5">{{statusMessage}}</td>
+        </tr>
+        <tr *ngIf="employees && employees.length==0">
+            <td colspan="5">No Employees found</td>
+        </tr>
+    </tbody>
+</table>
+</div>
+<div *ngIf='createNew'>
+    <app-create-employee-component></app-create-employee-component>     
+</div>
+<br/>
+<!-- <div>
+    <input type="text" [(ngModel)] ="color" [style.background]="color" />
+</div> -->

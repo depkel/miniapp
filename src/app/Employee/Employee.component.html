@@ -1,0 +1,114 @@
+﻿<!--<style>
+ table {
+  color: #369;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: large;
+  border-collapse:collapse;
+  font-style:italic;
+}
+td {
+border: 1px solid black;
+}
+
+</style>-->
+<!--<br />-->
+<!--FirstName <input type="text" id="txtfirstName" [value]='firstName' (input)='firstName = $event.target.value' />-->
+<!--FirstName <input type="text" id="txtfirstName" [(ngModel)]='firstName'/>-->
+<!--<br />-->
+<!--LastName <input type="text" id="txtlastName" [value]='lastName' (input)='lastName = $event.target.value' />-->
+<!--LastName <input type="text" id="txtlastName" [(ngModel)]='lastName' />-->
+<!--<br />-->
+<!--Gender <input type="text" id="txtGender" [value]='Gender' (input)='Gender = $event.target.value' />-->
+<!--Gender <input type="text" id="txtGender" [(ngModel)]='Gender'/>-->
+<!--<br />-->
+<!--Age <input type="text" id="txtAge" [value]='Age' (input)='Age = $event.target.value' />-->
+<!--Age <input type="text" id="txtAge" [(ngModel)]='Age'/>-->
+<!--<br />
+You have entered : {{firstName}}
+<br />-->
+
+
+<table *ngIf="employee">
+    <thead>
+        <tr>
+           
+            <th [attr.colspan]="2">Employee Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>ID</td>
+            <td><input type="text" id="txtID" [(ngModel)]='employee.Id' readonly="readonly"/></td>
+        </tr>
+        <tr>
+            <td>FirstName</td>
+            
+            <td><input type="text" id="txtfirstName" [(ngModel)]='employee.firstname'/></td>
+        </tr>
+        <tr>
+            <td>Last Name</td>
+            
+            <td><input type="text" id="txtlastName" [(ngModel)]='employee.lastname' /></td>
+        </tr>
+        <tr *ngIf='showDetails' >
+            <td>Gender</td>
+           
+            <td><input type="text" id="txtGender" [(ngModel)]='employee.gender'/></td>
+        </tr>
+        <tr *ngIf='showDetails'>
+            <td>Salary</td>
+            
+            <td><input type="text" id="txtSalary" [(ngModel)]='employee.salary'/></td>
+        </tr>
+        <tr *ngIf='showDetails'>
+            <td>Department</td>
+             <td><input type="text" id="txtDepartment" [(ngModel)]='employee.Department'/></td>
+        </tr>
+        <tr *ngIf='showDetails'>
+            <td>Active</td>
+            <td><input type="checkbox" id="chkActive" [(ngModel)]='employee.isActive'/></td>
+        </tr>
+        <tr *ngIf='showDetails'>
+            <td>Photo</td>
+            <td>
+                <input type="textbox" id="txtPhotoPath" [(ngModel)]='employee.PhotoPath'/>
+                <br/>
+                <img [src]="employee.PhotoPath" width="100" height="100"/>
+                 <br/>   
+                <!-- <img [src]='employee.PhotoPath' height="100" width="100"/>  -->
+                <br/>
+                
+                <input type='file' (change)='onSelectFile($event)'/>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br/>
+<button (click)="toggleDetails()">
+    {{showDetails?'Hide':'Show'}} details
+</button>
+
+<div *ngIf="!employee">
+    {{statusMessage}}
+</div>
+<div style="margin-top:5px">
+    <table>
+        <tr>
+            <td>
+                <button class="btn btn-primary" (click)="OnUpdateClick()">Update Employee</button>
+            </td>
+            <td>
+                <button class="btn btn-primary" (click)="OnBackButtonClick()"><i class="fa fa-home"></i> Back to employee list</button>
+            </td>
+        </tr>
+    </table>
+    
+    
+    
+</div>
+<div>
+   Employee ID: {{employee.Id}}
+    Employee Name: {{employee.firstname}} 
+</div>
+
+
